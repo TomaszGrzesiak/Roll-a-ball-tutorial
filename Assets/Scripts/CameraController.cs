@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         // the line below answer 50% of exercise 5
-        offset = transform.position - player.transform.position;
+        offset = new Vector3(0,10,0) - player.transform.position;
         print($"offset: {offset}, transform.position: {transform.position} - player: {player.transform.position}");
     }
 
@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     {
         // the line below answer another 50% of the exercise 5
         transform.position = player.transform.position + offset;
+        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         print($"offset: {offset}, transform.position: {transform.position} + player: {player.transform.position}");
     }
 }

@@ -5,9 +5,12 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 1;
+    public float moveSpeed  = 5f;
+    public float rotationSpeed = 200f;
+
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    
     
     private Rigidbody rb;
     private int count;
@@ -40,13 +43,29 @@ public class PlayerController : MonoBehaviour
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
     }
-    
-    private void FixedUpdate()
+    //
+    // private void FixedUpdate()
+    // {
+    //     // Below is the answer to exercise 4
+    //     // adding force (pushing) the player - enforcing its movement
+    //     Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+    //     rb.AddForce(movement * speed);
+    // }
+
+    private void Update()
     {
-        // Below is the answer to exercise 4
-        // adding force (pushing) the player - enforcing its movement
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+        // Rotation (A & D keys)
+        float rotation = 0f;
+        if (Input.GetKey(KeyCode.A)) rotation -= rotationSpeed * Time.deltaTime;
+        else if (Input.GetKey(KeyCode.D)) rotation = rotationSpeed * Time.deltaTime;
+        transform.Rotate(0, rotation, 0);
+        
+        // Movement (W & S keys)
+        float moveDirection = 0f;
+        if (Input.GetKey(KeyCode.W)) moveDirection = 1f;
+        else if (Input.GetKey(KeyCode.S)) moveDirection = -1f;
+        
+        transform.Translate(Vector3.forward * moveDirection * moveSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
