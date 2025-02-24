@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        // Below is the answer to exercise 4
         // adding force (pushing) the player - enforcing its movement
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
